@@ -10,7 +10,6 @@ namespace MagicCoreWPF.DataBase.Interfaces
     {
         void LoadDataBase();
         void InitDataBase();
-        void ReadContent();
         void AddCategory(string name, long parentCategoryId);
         void ChangeCategory(long categoryId, string newName, long newParentCategoryId);
         void RemoveCategory(long categoryId);
@@ -18,5 +17,6 @@ namespace MagicCoreWPF.DataBase.Interfaces
         void AddInfoBlock(long categoryId, string name, string content);
         void ChangeInfoBlock(long infoBlockId, string newName, string newContent);
         void RemoveInfoBlock(long infoBlockId);
+        void ReleaseBase();
     }
 }

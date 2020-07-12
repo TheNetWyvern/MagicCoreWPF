@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MagicCoreWPF.DataBase;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace MagicCoreWPF
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            MainDataBaseController.Instance.ReleaseBase();
         }
     }
 }

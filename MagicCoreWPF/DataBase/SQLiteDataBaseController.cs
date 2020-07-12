@@ -1,6 +1,8 @@
 ﻿using MagicCoreWPF.DataBase.Interfaces;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +11,9 @@ namespace MagicCoreWPF.DataBase
 {
     public class SQLiteDataBaseController : IDataBaseController
     {
+        SqliteConnection connection;
+        SqliteCommand command;
+
         public void AddCategory(string name, long parentCategoryId)
         {
             throw new NotImplementedException();
@@ -31,15 +36,18 @@ namespace MagicCoreWPF.DataBase
 
         public void InitDataBase()
         {
-            throw new NotImplementedException();
+            Directory.CreateDirectory(Path.Combine(Configurator.Instance.folderPath, Configurator.Instance.folderName));
+
+            connection = new SqliteConnection($"Data Source = {Path.Combine(Configurator.Instance.folderPath, Configurator.Instance.folderName,Configurator.Instance.dataBaseName,".sqlite3")}");
+            connection.Open();
         }
 
         public void LoadDataBase()
         {
-            throw new NotImplementedException();
+
         }
 
-        public void ReadContent()
+        public void ReleaseBase()
         {
             throw new NotImplementedException();
         }

@@ -7,11 +7,26 @@ using System.Threading.Tasks;
 
 namespace MagicCoreWPF.DataBase
 {
+    //TODO: NotSetControllerException
     public class MainDataBaseController : IDataBaseController
     {
         private IDataBaseController currentController;
 
-        public MainDataBaseController(IDataBaseController baseController) 
+        private static readonly Lazy<MainDataBaseController>
+        lazy =
+            new Lazy<MainDataBaseController>
+                (() => new MainDataBaseController());
+
+        private MainDataBaseController() { }
+        public static MainDataBaseController Instance
+        {
+            get
+            {
+                return lazy.Value;
+            }
+        }
+
+        public void SetController(IDataBaseController baseController) 
         {
             currentController = baseController;
         }
@@ -46,9 +61,9 @@ namespace MagicCoreWPF.DataBase
             currentController.LoadDataBase();
         }
 
-        public void ReadContent()
+        public void ReleaseBase()
         {
-            currentController.ReadContent();
+            currentController.ReleaseBase();
         }
 
         public void RemoveCategory(long categoryId)
