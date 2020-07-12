@@ -56,11 +56,6 @@ namespace MagicCoreWPF.DataBase
             currentController.InitDataBase();
         }
 
-        public void LoadDataBase()
-        {
-            currentController.LoadDataBase();
-        }
-
         public void ReleaseBase()
         {
             currentController.ReleaseBase();
@@ -74,6 +69,11 @@ namespace MagicCoreWPF.DataBase
         public void RemoveInfoBlock(long infoBlockId)
         {
             currentController.RemoveInfoBlock(infoBlockId);
+        }
+
+        public void ReloadDataBase()
+        {
+            currentController.ReloadDataBase();
         }
     }
 }

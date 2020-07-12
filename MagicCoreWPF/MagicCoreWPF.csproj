@@ -131,8 +131,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MagicCoreClasses\MagicCoreClasses\MagicCoreClasses.csproj">
-      <Project>{f9e1576a-a71c-439e-86aa-d25544f1ecce}</Project>
+    <ProjectReference Include="..\MagicCoreClasses\MagicCoreClasses\MagicCoreClasses.csproj">
+      <Project>{F9E1576A-A71C-439E-86AA-D25544F1ECCE}</Project>
       <Name>MagicCoreClasses</Name>
     </ProjectReference>
   </ItemGroup>

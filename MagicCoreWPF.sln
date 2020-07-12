@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicCoreWPF", "MagicCoreWP
 		{F9E1576A-A71C-439E-86AA-D25544F1ECCE} = {F9E1576A-A71C-439E-86AA-D25544F1ECCE}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicCoreClasses", "..\MagicCoreClasses\MagicCoreClasses\MagicCoreClasses.csproj", "{F9E1576A-A71C-439E-86AA-D25544F1ECCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicCoreClasses", "MagicCoreClasses\MagicCoreClasses\MagicCoreClasses.csproj", "{F9E1576A-A71C-439E-86AA-D25544F1ECCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

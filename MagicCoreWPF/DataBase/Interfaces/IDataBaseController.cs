@@ -8,7 +8,7 @@ namespace MagicCoreWPF.DataBase.Interfaces
 {
     public interface IDataBaseController
     {
-        void LoadDataBase();
+        void ReloadDataBase();
         void InitDataBase();
         void AddCategory(string name, long parentCategoryId);
         void ChangeCategory(long categoryId, string newName, long newParentCategoryId);

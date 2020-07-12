@@ -1,4 +1,6 @@
-﻿using MagicCoreWPF.DataBase.Interfaces;
+﻿using MagicCoreClasses;
+using MagicCoreClasses.InfoRepository;
+using MagicCoreWPF.DataBase.Interfaces;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
@@ -61,9 +63,10 @@ namespace MagicCoreWPF.DataBase
                     "PRIMARY KEY(id ASC)" +
                 ")",connection);
             command.ExecuteNonQuery();
+            LoadDataBase();
         }
 
-        public void LoadDataBase()
+        private void LoadDataBase()
         {
             command = new SqliteCommand("SELECT id,parentId,name,description FROM categories");
             reader = command.ExecuteReader();
@@ -71,8 +74,17 @@ namespace MagicCoreWPF.DataBase
             {
                 while (reader.Read())
                 {
-                 //   var name = reader.GetString(0);
-                    Storage.Instance.categories.Add                
+                    Storage.Instance.categories.Add(new Category(reader.GetInt64(0), reader.GetInt64(1), reader.GetString(2), reader.GetString(3)));               
+                }
+            }
+
+            command = new SqliteCommand("SELECT id,categoryId,title,content FROM infoblocks");
+            reader = command.ExecuteReader();
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Storage.Instance.infoBlocks.Add(new InfoBlock(reader.GetInt64(0), reader.GetInt64(1), reader.GetString(2), reader.GetString(3)));
                 }
             }
         }
@@ -90,6 +102,11 @@ namespace MagicCoreWPF.DataBase
                 command.Dispose();
             }
             command = null;
+        }
+
+        public void ReloadDataBase()
+        {
+            LoadDataBase();
         }
 
         public void RemoveCategory(long categoryId)
