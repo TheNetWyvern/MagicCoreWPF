@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MagicCoreWPF"
         mc:Ignorable="d"
-        Title="MagicCoreWPF v1.0" Height="800" Width="1200" Background="#191919" WindowStartupLocation="CenterScreen" Closed="Window_Closed" >
+        Title="MagicCoreWPF v1.0" Height="800" Width="1200" WindowStartupLocation="CenterScreen" Closed="Window_Closed" >
+    <Window.Background>
+        <ImageBrush ImageSource="Resources/background.png"/>
+    </Window.Background>
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -19,21 +22,14 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <TreeView Name="Categories" Grid.Column="0" Background="Transparent" Grid.Row="0" BorderBrush="#FF00B4FF" Foreground="#FF00B4FF"/>
-        <ListBox Name="InfoBlocks" Grid.Column="1" Background="Transparent" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="3" BorderBrush="#FF00B4FF" Foreground="#FF00B4FF"/>
-        <Button Name="AddCategoryButton" Grid.Column="0" Grid.Row="1" Content="Добавить категорию" Background="Transparent" Foreground="#FF00B4FF" BorderBrush="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand"/>
-        <Button Name="ChangeCategoryButton" Grid.Column="0" Grid.Row="2" Content="Изменить категорию" Background="Transparent" Foreground="#FF00B4FF" BorderBrush="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand"/>
-        <Button Name="RemoveCategoryButton" Grid.Column="0" Grid.Row="3" Content="Удалить категорию" Background="Transparent" Foreground="#FF00B4FF" BorderBrush="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand"/>
-        <Button Name="AddInfoBlockButton" Grid.Column="1" Grid.Row="3" Content="Добавить инфоблок" Background="Transparent" Foreground="#FF00B4FF" BorderBrush="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand">
-            <Button.OpacityMask>
-                <RadialGradientBrush>
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </RadialGradientBrush>
-            </Button.OpacityMask>
-        </Button>
-        <Button Name="ChangeInfoBlockButton" Grid.Column="2" Grid.Row="3" Content="Изменить инфоблок" Background="Transparent" Foreground="#FF00B4FF" BorderBrush="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand"/>
-        <Button Name="RemoveInfoBlockButton" Grid.Column="3" Grid.Row="3" Content="Удалить инфоблок" Background="Transparent" Foreground="#FF00B4FF" BorderBrush="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand"/>
+        <TreeView Name="Categories" Grid.Column="0" Background="Transparent" Grid.Row="0" BorderBrush="{x:Null}"/>
+        <ListBox Name="InfoBlocks" Grid.Column="1" Background="Transparent" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="3" BorderBrush="{x:Null}"/>
+        <Button Name="AddCategoryButton" Grid.Column="0" Grid.Row="1" Content="Добавить категорию" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="{x:Null}"/>
+        <Button Name="ChangeCategoryButton" Grid.Column="0" Grid.Row="2" Content="Изменить категорию" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="{x:Null}"/>
+        <Button Name="RemoveCategoryButton" Grid.Column="0" Grid.Row="3" Content="Удалить категорию" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="{x:Null}"/>
+        <Button Name="AddInfoBlockButton" Grid.Column="1" Grid.Row="3" Content="Добавить инфоблок" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="{x:Null}" />
+        <Button Name="ChangeInfoBlockButton" Grid.Column="2" Grid.Row="3" Content="Изменить инфоблок" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" Background="Transparent" BorderBrush="{x:Null}"/>
+        <Button Name="RemoveInfoBlockButton" Grid.Column="3" Grid.Row="3" Content="Удалить инфоблок" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="{x:Null}"/>
     </Grid>
     <!-- TODO create light effect and shadows effect -->
 </Window>

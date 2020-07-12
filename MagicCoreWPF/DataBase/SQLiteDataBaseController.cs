@@ -1,13 +1,8 @@
-﻿using MagicCoreClasses;
-using MagicCoreClasses.InfoRepository;
+﻿using MagicCoreClasses.InfoRepository;
 using MagicCoreWPF.DataBase.Interfaces;
 using Microsoft.Data.Sqlite;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MagicCoreWPF.DataBase
 {
@@ -68,9 +63,8 @@ namespace MagicCoreWPF.DataBase
 
         private void LoadDataBase()
         {
-            command = new SqliteCommand("SELECT id,parentId,name,description FROM categories");
-            reader = command.ExecuteReader();
-            using (var reader = command.ExecuteReader())
+            command = new SqliteCommand("SELECT id,parentId,name,description FROM categories",connection);
+            using (reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
@@ -78,9 +72,8 @@ namespace MagicCoreWPF.DataBase
                 }
             }
 
-            command = new SqliteCommand("SELECT id,categoryId,title,content FROM infoblocks");
-            reader = command.ExecuteReader();
-            using (var reader = command.ExecuteReader())
+            command = new SqliteCommand("SELECT id,categoryId,title,content FROM infoblocks",connection);
+            using (reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
@@ -116,7 +109,9 @@ namespace MagicCoreWPF.DataBase
 
         public void RemoveInfoBlock(long infoBlockId)
         {
-            throw new NotImplementedException();
+           // if()
         }
+
+
     }
 }
