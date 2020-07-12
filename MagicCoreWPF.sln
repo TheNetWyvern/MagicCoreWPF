@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicCoreWPF", "MagicCoreWPF\MagicCoreWPF.csproj", "{87E233F9-6E6D-48B8-A2B3-F01C6BC6AAEA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F9E1576A-A71C-439E-86AA-D25544F1ECCE} = {F9E1576A-A71C-439E-86AA-D25544F1ECCE}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicCoreClasses", "..\MagicCoreClasses\MagicCoreClasses\MagicCoreClasses.csproj", "{F9E1576A-A71C-439E-86AA-D25544F1ECCE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87E233F9-6E6D-48B8-A2B3-F01C6BC6AAEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E233F9-6E6D-48B8-A2B3-F01C6BC6AAEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87E233F9-6E6D-48B8-A2B3-F01C6BC6AAEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87E233F9-6E6D-48B8-A2B3-F01C6BC6AAEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9E1576A-A71C-439E-86AA-D25544F1ECCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9E1576A-A71C-439E-86AA-D25544F1ECCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9E1576A-A71C-439E-86AA-D25544F1ECCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9E1576A-A71C-439E-86AA-D25544F1ECCE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC4CD1BC-CC5C-4F37-94DD-9C20E1999F09}
+	EndGlobalSection
+EndGlobal

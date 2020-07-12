@@ -1,0 +1,3 @@
+[submodule "MagicCoreClasses"]
+	path = MagicCoreClasses
+	url = git@github.com:TheNetWyvern/MagicCoreClasses.git
