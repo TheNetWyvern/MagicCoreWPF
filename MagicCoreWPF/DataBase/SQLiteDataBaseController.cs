@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace MagicCoreWPF.DataBase
 {
+    //TODO: Добавить безопасные команды
     public class SQLiteDataBaseController : IDataBaseController
     {
         SqliteConnection connection;
@@ -38,8 +39,27 @@ namespace MagicCoreWPF.DataBase
         {
             Directory.CreateDirectory(Path.Combine(Configurator.Instance.folderPath, Configurator.Instance.folderName));
 
-            connection = new SqliteConnection($"Data Source = {Path.Combine(Configurator.Instance.folderPath, Configurator.Instance.folderName,Configurator.Instance.dataBaseName,".sqlite3")}");
+            connection = new SqliteConnection($"Data Source = {Path.Combine(Configurator.Instance.folderPath, Configurator.Instance.folderName,$"{Configurator.Instance.dataBaseName}.sqlite3")}");
             connection.Open();
+            command = new SqliteCommand("CREATE TABLE IF NOT EXISTS categories" +
+                "(" +
+                    "id INTEGER," +
+                    "parentId INTEGER," +
+                    "name TEXT," +
+                    "description TEXT," +
+                    "PRIMARY KEY(id ASC)" +
+                ")",connection);
+            command.ExecuteNonQuery();
+
+            command = new SqliteCommand("CREATE TABLE IF NOT EXISTS infoblocks" +
+                "(" +
+                    "id INTEGER," +
+                    "categoryId INTEGER," +
+                    "title TEXT," +
+                    "content TEXT," +
+                    "PRIMARY KEY(id ASC)" +
+                ")",connection);
+            command.ExecuteNonQuery();
         }
 
         public void LoadDataBase()
@@ -49,7 +69,17 @@ namespace MagicCoreWPF.DataBase
 
         public void ReleaseBase()
         {
-            throw new NotImplementedException();
+            if (connection != null)
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            connection = null;
+            if (command != null)
+            {
+                command.Dispose();
+            }
+            command = null;
         }
 
         public void RemoveCategory(long categoryId)

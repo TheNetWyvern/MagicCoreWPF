@@ -18,12 +18,16 @@ namespace MagicCoreWPF
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
+    /// 
+    /// 
     /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            MainDataBaseController.Instance.SetController(new SQLiteDataBaseController());
+            MainDataBaseController.Instance.InitDataBase();
         }
 
         private void Window_Closed(object sender, EventArgs e)
