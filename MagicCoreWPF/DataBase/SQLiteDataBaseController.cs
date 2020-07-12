@@ -14,6 +14,7 @@ namespace MagicCoreWPF.DataBase
     {
         SqliteConnection connection;
         SqliteCommand command;
+        SqliteDataReader reader;
 
         public void AddCategory(string name, long parentCategoryId)
         {
@@ -64,7 +65,16 @@ namespace MagicCoreWPF.DataBase
 
         public void LoadDataBase()
         {
-
+            command = new SqliteCommand("SELECT id,parentId,name,description FROM categories");
+            reader = command.ExecuteReader();
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                 //   var name = reader.GetString(0);
+                    Storage.Instance.categories.Add                
+                }
+            }
         }
 
         public void ReleaseBase()
