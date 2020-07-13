@@ -1,7 +1,6 @@
 ﻿using MagicCoreClasses.InfoRepository;
 using MagicCoreWPF.DataBase.Interfaces;
 using Microsoft.Data.Sqlite;
-using System;
 using System.IO;
 
 namespace MagicCoreWPF.DataBase
@@ -53,7 +52,7 @@ namespace MagicCoreWPF.DataBase
         {
             Directory.CreateDirectory(Path.Combine(Configurator.Instance.folderPath, Configurator.Instance.folderName));
 
-            connection = new SqliteConnection($"Data Source = {Path.Combine(Configurator.Instance.folderPath, Configurator.Instance.folderName,$"{Configurator.Instance.dataBaseName}.sqlite3")}");
+            connection = new SqliteConnection($"Data Source = {Path.Combine(Configurator.Instance.folderPath, Configurator.Instance.folderName, $"{Configurator.Instance.dataBaseName}.sqlite3")}");
             connection.Open();
             command = new SqliteCommand("CREATE TABLE IF NOT EXISTS categories" +
                 "(" +
@@ -62,7 +61,7 @@ namespace MagicCoreWPF.DataBase
                     "name TEXT," +
                     "description TEXT DEFAULT desc," +
                     "PRIMARY KEY(id ASC)" +
-                ")",connection);
+                ")", connection);
             command.ExecuteNonQuery();
 
             command = new SqliteCommand("CREATE TABLE IF NOT EXISTS infoblocks" +
@@ -72,33 +71,33 @@ namespace MagicCoreWPF.DataBase
                     "title TEXT," +
                     "content TEXT," +
                     "PRIMARY KEY(id ASC)" +
-                ")",connection);
+                ")", connection);
             command.ExecuteNonQuery();
             LoadDataBase();
         }
 
         private void LoadDataBase()
         {
-            Storage.Instance.categories.Clear();
+            Storage.Instance.Categories.Clear();
 
-            Storage.Instance.categories.Add(new Category(0, -1, "Корень", "Описание"));
-            command = new SqliteCommand("SELECT id,parentId,name,description FROM categories ORDER BY parentId ASC",connection);
+            Storage.Instance.Categories.Add(new Category(0, -1, "Корень", "Описание"));
+            command = new SqliteCommand("SELECT id,parentId,name,description FROM categories ORDER BY parentId ASC", connection);
             using (reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    Storage.Instance.categories.Add(new Category(reader.GetInt64(0), reader.GetInt64(1), reader.GetString(2), reader.GetString(3)));               
+                    Storage.Instance.Categories.Add(new Category(reader.GetInt64(0), reader.GetInt64(1), reader.GetString(2), reader.GetString(3)));
                 }
             }
 
-            Storage.Instance.infoBlocks.Clear();
+            Storage.Instance.InfoBlocks.Clear();
 
-            command = new SqliteCommand("SELECT id,categoryId,title,content FROM infoblocks",connection);
+            command = new SqliteCommand("SELECT id,categoryId,title,content FROM infoblocks", connection);
             using (reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    Storage.Instance.infoBlocks.Add(new InfoBlock(reader.GetInt64(0), reader.GetInt64(1), reader.GetString(2), reader.GetString(3)));
+                    Storage.Instance.InfoBlocks.Add(new InfoBlock(reader.GetInt64(0), reader.GetInt64(1), reader.GetString(2), reader.GetString(3)));
                 }
             }
         }
@@ -137,7 +136,5 @@ namespace MagicCoreWPF.DataBase
             command.Parameters.AddWithValue("$id", infoBlockId);
             command.ExecuteNonQuery();
         }
-
-
     }
 }

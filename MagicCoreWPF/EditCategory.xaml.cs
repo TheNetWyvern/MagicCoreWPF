@@ -1,18 +1,6 @@
 ﻿using MagicCoreClasses.InfoRepository;
 using MagicCoreWPF.DataBase;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MagicCoreWPF
 {
@@ -24,7 +12,7 @@ namespace MagicCoreWPF
         public EditCategory()
         {
             InitializeComponent();
-            ParentIdBox.ItemsSource = Storage.Instance.categories;
+            ParentIdBox.ItemsSource = Storage.Instance.Categories;
             ParentIdBox.SelectedIndex = 0;
         }
 
@@ -32,12 +20,12 @@ namespace MagicCoreWPF
         {
             if (ParentIdBox.SelectedIndex >= 0 && NameText.Text.Length > 0)
             {
-                MainDataBaseController.Instance.AddCategory(NameText.Text, (ParentIdBox.SelectedItem as Category).id);
-                this.DialogResult = true;
+                MainDataBaseController.Instance.AddCategory(NameText.Text, ((Category)ParentIdBox.SelectedItem).Id);
+                DialogResult = true;
             }
-            else 
+            else
             {
-                MessageBox.Show("Не заполнены все поля!","Ошибка", MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Не заполнены все поля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
