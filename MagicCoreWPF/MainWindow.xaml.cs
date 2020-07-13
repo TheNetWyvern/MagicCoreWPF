@@ -19,26 +19,15 @@ namespace MagicCoreWPF
             MainDataBaseController.Instance.InitDataBase();
             _viewModel = new MainWindowViewModel();
             DataContext = _viewModel;
-            Categories.Items.Add(_viewModel.RootCategory);
-            //UpdateCategories();
+            UpdateCategories();
         }
 
         private void UpdateCategories()
-        {
-            //Categories.Items.Clear();
-            //Categories.Items.Add(new CategoryTreeItem(Storage.Instance.Categories[0]));
-            //foreach (var category in Storage.Instance.Categories)
-            //{
-            //    for (int i = 0; i < Categories.Items.Count; i++)
-            //    {
-            //        CategoryTreeItem newCategory = (CategoryTreeItem)Categories.Items[i];
-            //        if (category.ParentId == newCategory.Id)
-            //        {
-            //            newCategory.Items.Add(new CategoryTreeItem(category));
-            //            break;
-            //        }
-            //    }
-            //}
+        { 
+            _viewModel.LoadRootCategory();
+            Categories.Items.Clear();
+            Categories.Items.Add(_viewModel.RootCategory);
+         //   (Categories.Items[0] as TreeViewItem)
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -51,9 +40,7 @@ namespace MagicCoreWPF
             EditCategory categoryForm = new EditCategory();
             if (categoryForm.ShowDialog() == true)
             {
-                _viewModel.LoadRootCategory();
-                Categories.Items.Clear();
-                Categories.Items.Add(_viewModel.RootCategory);
+                UpdateCategories();
             }
         }
     }

@@ -21,6 +21,7 @@ namespace MagicCoreWPF
             if (ParentIdBox.SelectedIndex >= 0 && NameText.Text.Length > 0)
             {
                 MainDataBaseController.Instance.AddCategory(NameText.Text, ((Category)ParentIdBox.SelectedItem).Id);
+                MainDataBaseController.Instance.ReloadDataBase();
                 DialogResult = true;
             }
             else

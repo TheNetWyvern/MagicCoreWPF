@@ -20,7 +20,7 @@ namespace MagicCoreWPF.InternalClasses.ViewModels
 
         public MainWindowViewModel()
         {
-            LoadRootCategory();
+            
         }
 
         public void LoadRootCategory()
