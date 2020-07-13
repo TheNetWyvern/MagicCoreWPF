@@ -32,6 +32,9 @@
                     <TextBlock Text="{Binding Name}" Foreground="#FF00B4FF" FontSize="12" FontWeight="Bold" />
                 </TreeViewItem.Header>
             </TreeViewItem>-->
+            <Style TargetType="{x:Type TreeViewItem}">
+                <Setter Property="IsExpanded" Value="{Binding IsExpanded}"></Setter>
+            </Style>
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type models:CategoryTreeItem}"
                                           ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}">
@@ -51,4 +54,6 @@
         <Button Name="RemoveInfoBlockButton" Grid.Column="3" Grid.Row="3" Content="Удалить инфоблок" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="#FF00B4FF" />
     </Grid>
     <!-- TODO create light effect and shadows effect -->
+
 </Window>
+    
