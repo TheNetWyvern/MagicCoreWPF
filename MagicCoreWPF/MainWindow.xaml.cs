@@ -43,7 +43,7 @@ namespace MagicCoreWPF
                 {
                     if (category.parentId == (Categories.Items[i] as CategoryTreeItem).id)
                     {
-                        (Categories.Items[i] as CategoryTreeItem).Header = "123123";
+                        //(Categories.Items[i] as CategoryTreeItem).Header = "123123";
                         (Categories.Items[i] as CategoryTreeItem).Items.Add(new CategoryTreeItem(category));
                         break;
                     }
