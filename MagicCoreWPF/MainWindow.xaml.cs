@@ -1,54 +1,44 @@
 ﻿using MagicCoreWPF.DataBase;
-using MagicCoreWPF.InternalClasses;
+using MagicCoreWPF.InternalClasses.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MagicCoreWPF
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
-    /// 
-    /// 
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MainWindowViewModel _viewModel;
+
         public MainWindow()
         {
             InitializeComponent();
             MainDataBaseController.Instance.SetController(new SQLiteDataBaseController());
             MainDataBaseController.Instance.InitDataBase();
-            Update();
-
+            _viewModel = new MainWindowViewModel();
+            DataContext = _viewModel;
+            Categories.Items.Add(_viewModel.RootCategory);
+            //UpdateCategories();
         }
 
-        private void Update() 
+        private void UpdateCategories()
         {
-            Categories.Items.Clear();
-            Categories.Items.Add(new CategoryTreeItem(Storage.Instance.categories[0]));
-            foreach (MagicCoreClasses.InfoRepository.Category category in Storage.Instance.categories)
-            {
-                for (int i = 0; i < Categories.Items.Count; i++)
-                {
-                    if (category.parentId == (Categories.Items[i] as CategoryTreeItem).id)
-                    {
-                        //(Categories.Items[i] as CategoryTreeItem).Header = "123123";
-                        (Categories.Items[i] as CategoryTreeItem).Items.Add(new CategoryTreeItem(category));
-                        break;
-                    }
-                }
-            }
+            //Categories.Items.Clear();
+            //Categories.Items.Add(new CategoryTreeItem(Storage.Instance.Categories[0]));
+            //foreach (var category in Storage.Instance.Categories)
+            //{
+            //    for (int i = 0; i < Categories.Items.Count; i++)
+            //    {
+            //        CategoryTreeItem newCategory = (CategoryTreeItem)Categories.Items[i];
+            //        if (category.ParentId == newCategory.Id)
+            //        {
+            //            newCategory.Items.Add(new CategoryTreeItem(category));
+            //            break;
+            //        }
+            //    }
+            //}
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -59,9 +49,11 @@ namespace MagicCoreWPF
         private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
         {
             EditCategory categoryForm = new EditCategory();
-            if (categoryForm.ShowDialog() == true) 
+            if (categoryForm.ShowDialog() == true)
             {
-                Update();
+                _viewModel.LoadRootCategory();
+                Categories.Items.Clear();
+                Categories.Items.Add(_viewModel.RootCategory);
             }
         }
     }
