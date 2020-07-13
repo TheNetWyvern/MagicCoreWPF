@@ -7,6 +7,7 @@ using System.IO;
 namespace MagicCoreWPF.DataBase
 {
     //TODO: Добавить безопасные команды
+    //TODO: Добавить MVVM
     public class SQLiteDataBaseController : IDataBaseController
     {
         private SqliteConnection connection;
@@ -59,7 +60,7 @@ namespace MagicCoreWPF.DataBase
                     "id INTEGER," +
                     "parentId INTEGER," +
                     "name TEXT," +
-                    "description TEXT," +
+                    "description TEXT DEFAULT desc," +
                     "PRIMARY KEY(id ASC)" +
                 ")",connection);
             command.ExecuteNonQuery();
@@ -78,7 +79,10 @@ namespace MagicCoreWPF.DataBase
 
         private void LoadDataBase()
         {
-            command = new SqliteCommand("SELECT id,parentId,name,description FROM categories",connection);
+            Storage.Instance.categories.Clear();
+
+            Storage.Instance.categories.Add(new Category(0, -1, "Корень", "Описание"));
+            command = new SqliteCommand("SELECT id,parentId,name,description FROM categories ORDER BY parentId ASC",connection);
             using (reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -86,6 +90,8 @@ namespace MagicCoreWPF.DataBase
                     Storage.Instance.categories.Add(new Category(reader.GetInt64(0), reader.GetInt64(1), reader.GetString(2), reader.GetString(3)));               
                 }
             }
+
+            Storage.Instance.infoBlocks.Clear();
 
             command = new SqliteCommand("SELECT id,categoryId,title,content FROM infoblocks",connection);
             using (reader = command.ExecuteReader())
