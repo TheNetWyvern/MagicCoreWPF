@@ -9,28 +9,43 @@ namespace MagicCoreWPF.DataBase
     //TODO: Добавить безопасные команды
     public class SQLiteDataBaseController : IDataBaseController
     {
-        SqliteConnection connection;
-        SqliteCommand command;
-        SqliteDataReader reader;
+        private SqliteConnection connection;
+        private SqliteCommand command;
+        private SqliteDataReader reader;
 
         public void AddCategory(string name, long parentCategoryId)
         {
-            throw new NotImplementedException();
+            command = new SqliteCommand("INSERT INTO categories (parentId,name) VALUES ($parentId,$name)", connection);
+            command.Parameters.AddWithValue("$name", name);
+            command.Parameters.AddWithValue("$parentId", parentCategoryId);
+            command.ExecuteNonQuery();
         }
 
-        public void AddInfoBlock(long categoryId, string name, string content)
+        public void AddInfoBlock(long categoryId, string title, string content)
         {
-            throw new NotImplementedException();
+            command = new SqliteCommand("INSERT INTO infoblocks (categoryId,title,content) VALUES ($categoryId,$title,$content)", connection);
+            command.Parameters.AddWithValue("$categoryId", categoryId);
+            command.Parameters.AddWithValue("$title", title);
+            command.Parameters.AddWithValue("$content", content);
+            command.ExecuteNonQuery();
         }
 
         public void ChangeCategory(long categoryId, string newName, long newParentCategoryId)
         {
-            throw new NotImplementedException();
+            command = new SqliteCommand("UPDATE categories SET name = $name, parentId = $parentId WHERE id = $id", connection);
+            command.Parameters.AddWithValue("$name", newName);
+            command.Parameters.AddWithValue("$parentId", newParentCategoryId);
+            command.Parameters.AddWithValue("$id", categoryId);
+            command.ExecuteNonQuery();
         }
 
-        public void ChangeInfoBlock(long infoBlockId, string newName, string newContent)
+        public void ChangeInfoBlock(long infoBlockId, string newTitle, string newContent)
         {
-            throw new NotImplementedException();
+            command = new SqliteCommand("UPDATE infoblocks SET title = $title, content = $content WHERE id = $id", connection);
+            command.Parameters.AddWithValue("$title", newTitle);
+            command.Parameters.AddWithValue("$content", newContent);
+            command.Parameters.AddWithValue("$id", infoBlockId);
+            command.ExecuteNonQuery();
         }
 
         public void InitDataBase()
@@ -104,12 +119,17 @@ namespace MagicCoreWPF.DataBase
 
         public void RemoveCategory(long categoryId)
         {
-            throw new NotImplementedException();
+            command = new SqliteCommand("DELETE FROM categories WHERE id = $id", connection);
+            command.Parameters.AddWithValue("$id", categoryId);
+            command.ExecuteNonQuery();
+            //TODO: Recursively remove infoblock of deleted category
         }
 
         public void RemoveInfoBlock(long infoBlockId)
         {
-           // if()
+            command = new SqliteCommand("DELETE FROM infoblocks WHERE id = $id", connection);
+            command.Parameters.AddWithValue("$id", infoBlockId);
+            command.ExecuteNonQuery();
         }
 
 

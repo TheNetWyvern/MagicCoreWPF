@@ -14,8 +14,8 @@ namespace MagicCoreWPF.DataBase.Interfaces
         void ChangeCategory(long categoryId, string newName, long newParentCategoryId);
         void RemoveCategory(long categoryId);
 
-        void AddInfoBlock(long categoryId, string name, string content);
-        void ChangeInfoBlock(long infoBlockId, string newName, string newContent);
+        void AddInfoBlock(long categoryId, string title, string content);
+        void ChangeInfoBlock(long infoBlockId, string newTitle, string newContent);
         void RemoveInfoBlock(long infoBlockId);
         void ReleaseBase();
     }

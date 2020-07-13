@@ -33,47 +33,74 @@ namespace MagicCoreWPF.DataBase
 
         public void AddCategory(string name, long parentCategoryId)
         {
-            currentController.AddCategory(name, parentCategoryId);
+            if (currentController != null)
+            {
+                currentController.AddCategory(name, parentCategoryId);
+            }
         }
 
-        public void AddInfoBlock(long categoryId, string name, string content)
+        public void AddInfoBlock(long categoryId, string title, string content)
         {
-            currentController.AddInfoBlock(categoryId,name,content);
+            if (currentController != null)
+            {
+                currentController.AddInfoBlock(categoryId, title, content);
+            }
         }
 
         public void ChangeCategory(long categoryId, string newName, long newParentCategoryId)
         {
-            currentController.ChangeCategory(categoryId, newName, newParentCategoryId);
+            if (currentController != null)
+            {
+                currentController.ChangeCategory(categoryId, newName, newParentCategoryId);
+            }
         }
 
-        public void ChangeInfoBlock(long infoBlockId, string newName, string newContent)
+        public void ChangeInfoBlock(long infoBlockId, string newTitle, string newContent)
         {
-            currentController.ChangeInfoBlock(infoBlockId, newName, newContent);
+            if (currentController != null)
+            {
+                currentController.ChangeInfoBlock(infoBlockId, newTitle, newContent);
+            }
         }
 
         public void InitDataBase()
         {
-            currentController.InitDataBase();
+            if (currentController != null)
+            {
+                currentController.InitDataBase();
+            }
         }
 
         public void ReleaseBase()
         {
-            currentController.ReleaseBase();
+            if (currentController != null)
+            {
+                currentController.ReleaseBase();
+            }
         }
 
         public void RemoveCategory(long categoryId)
         {
-            currentController.RemoveCategory(categoryId);
+            if (currentController != null)
+            {
+                currentController.RemoveCategory(categoryId);
+            }
         }
 
         public void RemoveInfoBlock(long infoBlockId)
         {
-            currentController.RemoveInfoBlock(infoBlockId);
+            if (currentController != null)
+            {
+                currentController.RemoveInfoBlock(infoBlockId);
+            }
         }
 
         public void ReloadDataBase()
         {
-            currentController.ReloadDataBase();
+            if (currentController != null)
+            {
+                currentController.ReloadDataBase();
+            }
         }
     }
 }
