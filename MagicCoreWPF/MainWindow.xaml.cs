@@ -43,5 +43,31 @@ namespace MagicCoreWPF
                 UpdateCategories();
             }
         }
+
+        private void ChangeCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Categories.SelectedItem != null)
+            {
+                EditCategory categoryForm = new EditCategory(Categories.SelectedItem as Category);
+                if (categoryForm.ShowDialog() == true)
+                {
+                    UpdateCategories();
+                }
+            }
+        }
+
+        private void RemoveCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Categories.SelectedItem != null)
+            {
+                
+                if (MessageBox.Show("Вы уверены?","Удаление категории", MessageBoxButton.OKCancel,MessageBoxImage.Warning) == MessageBoxResult.OK)
+                {
+                    MainDataBaseController.Instance.RemoveCategory((Categories.SelectedItem as Category).Id);
+                    MainDataBaseController.Instance.ReloadDataBase();
+                    UpdateCategories();
+                }
+            }
+        }
     }
 }

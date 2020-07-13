@@ -50,13 +50,12 @@
         </TreeView>
         <ListBox Name="InfoBlocks" Grid.Column="1" Background="Transparent" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="3" BorderBrush="#FF00B4FF" Foreground="#FF00B4FF" />
         <Button Name="AddCategoryButton" Grid.Column="0" Grid.Row="1" Content="Добавить категорию" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="#FF00B4FF" Click="AddCategoryButton_Click" />
-        <Button Name="ChangeCategoryButton" Grid.Column="0" Grid.Row="2" Content="Изменить категорию" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="#FF00B4FF" />
-        <Button Name="RemoveCategoryButton" Grid.Column="0" Grid.Row="3" Content="Удалить категорию" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="#FF00B4FF" />
+        <Button Name="ChangeCategoryButton" Grid.Column="0" Grid.Row="2" Content="Изменить категорию" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="#FF00B4FF" Click="ChangeCategoryButton_Click" />
+        <Button Name="RemoveCategoryButton" Grid.Column="0" Grid.Row="3" Content="Удалить категорию" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="#FF00B4FF" Click="RemoveCategoryButton_Click" />
         <Button Name="AddInfoBlockButton" Grid.Column="1" Grid.Row="3" Content="Добавить инфоблок" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="#FF00B4FF" />
         <Button Name="ChangeInfoBlockButton" Grid.Column="2" Grid.Row="3" Content="Изменить инфоблок" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" Background="Transparent" BorderBrush="#FF00B4FF" />
         <Button Name="RemoveInfoBlockButton" Grid.Column="3" Grid.Row="3" Content="Удалить инфоблок" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="#FF00B4FF" />
     </Grid>
     <!-- TODO create light effect and shadows effect -->
-
 </Window>
     

@@ -10,6 +10,7 @@ namespace MagicCoreWPF
     public partial class EditCategory : Window
     {
         private bool isChanged = false;
+        private Category tempCategory;
         public EditCategory()
         {
             InitializeComponent();
@@ -22,6 +23,15 @@ namespace MagicCoreWPF
             InitializeComponent();
             InitializeParentIdBox(id);
             isChanged = false;
+        }
+
+        public EditCategory( Category category)
+        {
+            InitializeComponent();
+            InitializeParentIdBox(category.ParentId);
+            NameText.Text = category.Name;
+            tempCategory = category;
+            isChanged = true;
         }
 
         private void InitializeParentIdBox(long id) 
@@ -49,7 +59,14 @@ namespace MagicCoreWPF
         {
             if (ParentIdBox.SelectedIndex >= 0 && NameText.Text.Length > 0)
             {
-                MainDataBaseController.Instance.AddCategory(NameText.Text, ((Category)ParentIdBox.SelectedItem).Id);
+                if (isChanged)
+                {
+                    MainDataBaseController.Instance.ChangeCategory(tempCategory.Id, NameText.Text, ((Category)ParentIdBox.SelectedItem).Id);
+                }
+                else
+                { 
+                    MainDataBaseController.Instance.AddCategory(NameText.Text, ((Category)ParentIdBox.SelectedItem).Id);
+                }
                 MainDataBaseController.Instance.ReloadDataBase();
                 DialogResult = true;
             }
