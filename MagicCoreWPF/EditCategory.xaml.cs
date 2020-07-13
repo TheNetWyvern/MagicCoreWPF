@@ -9,11 +9,40 @@ namespace MagicCoreWPF
     /// </summary>
     public partial class EditCategory : Window
     {
+        private bool isChanged = false;
         public EditCategory()
         {
             InitializeComponent();
+            InitializeParentIdBox(-1);
+            isChanged = false;
+        }
+
+        public EditCategory(long id)
+        {
+            InitializeComponent();
+            InitializeParentIdBox(id);
+            isChanged = false;
+        }
+
+        private void InitializeParentIdBox(long id) 
+        {
             ParentIdBox.ItemsSource = Storage.Instance.Categories;
-            ParentIdBox.SelectedIndex = 0;
+            if (id >= 0)
+            {
+                for (int i = 0; i < ParentIdBox.Items.Count; i++) 
+                {
+                    if ((ParentIdBox.Items[i] as Category).Id == id) 
+                    {
+                        ParentIdBox.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            else 
+            {
+                ParentIdBox.SelectedIndex = 0;
+            }
+           
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)

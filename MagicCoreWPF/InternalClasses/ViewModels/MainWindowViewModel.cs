@@ -26,26 +26,21 @@ namespace MagicCoreWPF.InternalClasses.ViewModels
         public void LoadRootCategory()
         {
             var databaseCategories = Storage.Instance.Categories;
-            var root = new CategoryTreeItem(databaseCategories[0]);
-            SetChildCategories(root);
-            RootCategory = root;
+            var root = new CategoryTreeItem(databaseCategories[0]);          
+            RootCategory = SetChildCategories(root);
         }
 
-        private void SetChildCategories(CategoryTreeItem root)
+        private CategoryTreeItem SetChildCategories(CategoryTreeItem root)
         {
-            //Skip root category
-            var categories = Storage.Instance.Categories.Skip(1).ToList();
-            while (categories.Count > 0)
+
+            for (int i = 0; i < Storage.Instance.Categories.Count; i++) 
             {
-                var newTreeViewCategory = new CategoryTreeItem(categories[0]);
-                var childCategories = Storage.Instance.Categories
-                    .Where(c => c.ParentId == newTreeViewCategory.Id)
-                    .Select(c => new CategoryTreeItem(c));
-                newTreeViewCategory.Items.AddRange(childCategories);
-                root.Items.Add(newTreeViewCategory);
-                categories.RemoveAt(0);
-                categories.RemoveAll(c => c.ParentId == newTreeViewCategory.Id);
+                if (Storage.Instance.Categories[i].ParentId == root.Id) 
+                {
+                    root.Items.Add(SetChildCategories(new CategoryTreeItem(Storage.Instance.Categories[i])));
+                }
             }
+            return root;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MagicCoreWPF.DataBase;
+﻿using MagicCoreClasses.InfoRepository;
+using MagicCoreWPF.DataBase;
 using MagicCoreWPF.InternalClasses.ViewModels;
 using System;
 using System.Windows;
@@ -27,7 +28,6 @@ namespace MagicCoreWPF
             _viewModel.LoadRootCategory();
             Categories.Items.Clear();
             Categories.Items.Add(_viewModel.RootCategory);
-         //   (Categories.Items[0] as TreeViewItem)
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace MagicCoreWPF
 
         private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
         {
-            EditCategory categoryForm = new EditCategory();
+            EditCategory categoryForm = new EditCategory(Categories.SelectedItem != null ? (Categories.SelectedItem as Category).Id : -1);
             if (categoryForm.ShowDialog() == true)
             {
                 UpdateCategories();
