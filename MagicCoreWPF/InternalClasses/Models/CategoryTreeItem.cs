@@ -10,8 +10,6 @@ namespace MagicCoreWPF.InternalClasses.Models
     {
         private ObservableCollection<CategoryTreeItem> _items;
 
-        public bool IsExpanded { get; set; } = true;
-
         public ObservableCollection<CategoryTreeItem> Items
         {
             get => _items;

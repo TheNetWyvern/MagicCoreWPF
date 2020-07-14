@@ -1,8 +1,10 @@
 ﻿using MagicCoreClasses.InfoRepository;
 using MagicCoreWPF.DataBase;
+using MagicCoreWPF.InternalClasses.Models;
 using MagicCoreWPF.InternalClasses.ViewModels;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MagicCoreWPF
 {
@@ -12,6 +14,7 @@ namespace MagicCoreWPF
     public partial class MainWindow : Window
     {
         private readonly MainWindowViewModel _viewModel;
+        private bool isClicked = false;
 
         public MainWindow()
         {
@@ -68,6 +71,30 @@ namespace MagicCoreWPF
                     UpdateCategories();
                 }
             }
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (!isClicked)
+            {
+                if (((sender as TreeViewItem).DataContext as CategoryTreeItem).Id == 0)
+                {
+                    RemoveCategoryButton.IsEnabled = false;
+                    ChangeCategoryButton.IsEnabled = false;
+                }
+                else
+                {
+                    RemoveCategoryButton.IsEnabled = true;
+                    ChangeCategoryButton.IsEnabled = true;
+                }
+                isClicked = true;
+            }
+            if (((sender as TreeViewItem).DataContext as CategoryTreeItem).Id == 0) 
+            {
+                isClicked = false;
+            }
+
+
         }
     }
 }

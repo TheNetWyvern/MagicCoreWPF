@@ -47,6 +47,12 @@
                                FontWeight="Bold" />
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <EventSetter Event="MouseLeftButtonUp" Handler="TextBlock_MouseLeftButtonDown"/>
+                    <Setter Property="IsExpanded" Value="True" />
+                </Style>
+            </TreeView.ItemContainerStyle>
         </TreeView>
         <ListBox Name="InfoBlocks" Grid.Column="1" Background="Transparent" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="3" BorderBrush="#FF00B4FF" Foreground="#FF00B4FF" />
         <Button Name="AddCategoryButton" Grid.Column="0" Grid.Row="1" Content="Добавить категорию" Background="Transparent" Foreground="#FF00B4FF" FontWeight="Bold" FontSize="16" Cursor="Hand" BorderBrush="#FF00B4FF" Click="AddCategoryButton_Click" />
