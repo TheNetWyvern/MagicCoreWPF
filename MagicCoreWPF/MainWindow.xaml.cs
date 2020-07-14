@@ -33,6 +33,18 @@ namespace MagicCoreWPF
             Categories.Items.Add(_viewModel.RootCategory);
         }
 
+        private void UpdateInfoBlocks() 
+        {
+            InfoBlocks.Items.Clear();
+            for (int i = 0; i < Storage.Instance.InfoBlocks.Count; i++)
+            {
+                if (Storage.Instance.InfoBlocks[i].CategoryId == (Categories.SelectedItem  as CategoryTreeItem).Id)
+                {
+                    InfoBlocks.Items.Add(Storage.Instance.InfoBlocks[i]);
+                }
+            }
+        }
+
         private void Window_Closed(object sender, EventArgs e)
         {
             MainDataBaseController.Instance.ReleaseBase();
@@ -68,12 +80,17 @@ namespace MagicCoreWPF
                 {
                     MainDataBaseController.Instance.RemoveCategory((Categories.SelectedItem as Category).Id);
                     MainDataBaseController.Instance.ReloadDataBase();
+                    RemoveCategoryButton.IsEnabled = false;
+                    ChangeCategoryButton.IsEnabled = false;
+                    AddInfoBlockButton.IsEnabled = false;
+                    ChangeInfoBlockButton.IsEnabled = false;
+                    RemoveInfoBlockButton.IsEnabled = false;
                     UpdateCategories();
                 }
             }
         }
 
-        private void TextBlock_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void TreeViewItem_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (!isClicked)
             {
@@ -87,14 +104,66 @@ namespace MagicCoreWPF
                     RemoveCategoryButton.IsEnabled = true;
                     ChangeCategoryButton.IsEnabled = true;
                 }
+                AddInfoBlockButton.IsEnabled = true;
+                UpdateInfoBlocks();
                 isClicked = true;
+                ChangeInfoBlockButton.IsEnabled = false;
+                RemoveInfoBlockButton.IsEnabled = false;
             }
             if (((sender as TreeViewItem).DataContext as CategoryTreeItem).Id == 0) 
             {
                 isClicked = false;
             }
+        }
 
 
+        private void InfoBlocks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (InfoBlocks.SelectedIndex >= 0) 
+            {
+                AddInfoBlockButton.IsEnabled = true;
+                ChangeInfoBlockButton.IsEnabled = true;
+                RemoveInfoBlockButton.IsEnabled = true;
+            }
+
+        }
+
+        private void RemoveInfoBlockButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (InfoBlocks.SelectedItem != null)
+            {
+
+                if (MessageBox.Show("Вы уверены?", "Удаление инфоблока", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
+                {
+                    MainDataBaseController.Instance.RemoveInfoBlock((InfoBlocks.SelectedItem as InfoBlock).Id);
+                    MainDataBaseController.Instance.ReloadDataBase();
+                    AddInfoBlockButton.IsEnabled = false;
+                    ChangeInfoBlockButton.IsEnabled = false;
+                    RemoveInfoBlockButton.IsEnabled = false;
+                    UpdateInfoBlocks();
+                }
+            }
+        }
+
+        private void AddInfoBlockButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditInfoBlock infoBlockForm = new EditInfoBlock(Categories.SelectedItem != null ? (Categories.SelectedItem as Category).Id : -1);
+            if (infoBlockForm.ShowDialog() == true)
+            {
+                UpdateInfoBlocks();
+            }
+        }
+
+        private void ChangeInfoBlockButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (InfoBlocks.SelectedItem != null)
+            {
+                EditInfoBlock infoBlockForm = new EditInfoBlock(InfoBlocks.SelectedItem as InfoBlock);
+                if (infoBlockForm.ShowDialog() == true)
+                {
+                    UpdateInfoBlocks();
+                }
+            }
         }
     }
 }
